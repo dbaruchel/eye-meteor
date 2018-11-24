@@ -1,0 +1,39 @@
+<head>
+  <title>eye-meteor</title>
+</head>
+
+<body>
+
+  {{> hello}}
+
+</body>
+
+<template name="hello">
+  <div id="hello">
+<!--     <button>Click Me</button> -->
+<!--     <p>You've pressed the button {{counter}} times.</p> -->
+    <div id="my-canvas">
+      <div id="target-1" class="target">
+<!--         <img class="gif" src="https://media.giphy.com/media/1Gv7cc5sCKBfq/giphy.gif"> -->
+        <div id="player-1"></div>
+      </div>
+      <div id="target-2" class="target">
+<!--         <img class="gif" src="https://media.giphy.com/media/1Gv7cc5sCKBfq/giphy.gif"> -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NVb5GV6lntU" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>
+      <div id="target-3" class="target">
+<!--         <img class="gif" src="https://media.giphy.com/media/1Gv7cc5sCKBfq/giphy.gif"> -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NVb5GV6lntU" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>
+      <div id="target-4" class="target">
+<!--         <img class="gif" src="https://media.giphy.com/media/1Gv7cc5sCKBfq/giphy.gif"> -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/NVb5GV6lntU" frameborder="0" allow="accelerometer;  encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>
+    </div>
+    <div id="webgazer-buttons">
+      <button id="webgazer-pause">Pause</button>
+      <button id="webgazer-resume">Resume</button>
+      <button id="webgazer-end">Save & End</button>
+    </div>
+  </div>
+</template>
