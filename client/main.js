@@ -25,46 +25,103 @@ if (Meteor.isClient) {
                 showinfo:'0',
                 iv_load_policy:'3',
                 modestbranding:'1',
-                playsinline:'1',
-                rel:'0'
+                rel:'0',
+                playsinline:'1'
+                
             },
       
             // Events like ready, state change, 
             events: {
-      
                 onReady: function (event) {
-        
                     // Play video when player ready.
                     event.target.playVideo();
                 }
-      
             }
-    
         });
-  
+
+        player2 = new YT.Player("player-2", {
+        
+            height: "315", 
+            width: "560", 
+            videoId: "NVb5GV6lntU",
+            playerVars: {
+                color: 'white',
+                controls: '0',
+                disablekb: '1',
+                fs:'0',
+                showinfo:'0',
+                iv_load_policy:'3',
+                modestbranding:'1',
+                rel:'0',
+                playsinline:'1'
+                
+            },
+        
+            // Events like ready, state change, 
+            events: {
+                onReady: function (event) {
+                    // Play video when player ready.
+                    event.target.playVideo();
+                }
+            }
+        });
+
+        player3 = new YT.Player("player-3", {
+        
+            height: "315", 
+            width: "560", 
+            videoId: "NVb5GV6lntU",
+            playerVars: {
+                color: 'white',
+                controls: '0',
+                disablekb: '1',
+                fs:'0',
+                showinfo:'0',
+                iv_load_policy:'3',
+                modestbranding:'1',
+                rel:'0',
+                playsinline:'1'
+                
+            },
+        
+            // Events like ready, state change, 
+            events: {
+                onReady: function (event) {
+                    // Play video when player ready.
+                    event.target.playVideo();
+                }
+            }
+        });
+
+        player4 = new YT.Player("player-4", {
+        
+            height: "315", 
+            width: "560", 
+            videoId: "NVb5GV6lntU",
+            playerVars: {
+                color: 'white',
+                controls: '0',
+                disablekb: '1',
+                fs:'0',
+                showinfo:'0',
+                iv_load_policy:'3',
+                modestbranding:'1',
+                rel:'0',
+                playsinline:'1'
+                
+            },
+        
+            // Events like ready, state change, 
+            events: {
+                onReady: function (event) {
+                    // Play video when player ready.
+                    event.target.playVideo();
+                }
+            }
+        });
     };
 
     YT.load();
-
-    // 4. The API will call this function when the video player is ready.
-    // function onPlayerReady(event) {
-    //   event.target.playVideo();
-    // }
-
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    // var done = false;
-    // function onPlayerStateChange(event) {
-    //   if (event.data == YT.PlayerState.PLAYING && !done) {
-    //     setTimeout(stopVideo, 6000);
-    //     done = true;
-    //   }
-    // }
-    function stopVideo() {
-      player1.stopVideo();
-    }
-    // player1.playVideo();
 }
 
 
@@ -127,39 +184,73 @@ Template.hello.onRendered(function helloOnCreated() {
   	    }
   	}, 1000);
 
-	
 	// instance.counter.set(instance.counter.get() + 1);
-
-
-
-
 });
+
 
 Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
+  // counter() {
+  //   return Template.instance().counter.get();
+  // },
 });
 
+
 Template.hello.events({
-  'click'(event, instance) {
-  	player1.playVideo();
-  	player1.mute();
+  'click #my-canvas': function(event, instance) {
+  	console.log("click canvas");
  //    // instance.counter.set(instance.counter.get() + 1);
  	var prediction = webgazer.getCurrentPrediction();
 
     $('#my-canvas').append('<div class="square" style="left:' + prediction.x + 'px; top:' + prediction.y + 'px;"></div>');
 
      // $(".gif").freezeframe();
-     $(".gif").gifplayer('stop');
+     // $(".gif").gifplayer('stop');
   },
-  'click #webgazer-pause'(event) {
-  	webgazer.pause()
+  'click #target-1': function(e, i) {
+  	console.log("click target-1");
+  	player1.mute();
+  	if (player1.getPlayerState() == 1) {
+  		player1.pauseVideo();
+  	}
+  	else {
+  		player1.playVideo();
+  	}
+
   },
-  'click #webgazer-resume'(event) {
-  	webgazer.resume()
+  'click #target-2': function(e, i) {
+  	player2.mute();
+  	if (player2.getPlayerState() == 1) {
+  		player2.pauseVideo();
+  	}
+  	else {
+  		player2.playVideo();
+  	}
   },
-  'click #webgazer-pause'(event) {
-  	webgazer.end()
+  'click #target-3': function(e, i) {
+  	player3.mute();
+  	if (player3.getPlayerState() == 1) {
+  		player3.pauseVideo();
+  	}
+  	else {
+  		player3.playVideo();
+  	}
+  },
+  'click #target-4': function(e, i) {
+  	player4.mute();
+  	if (player4.getPlayerState() == 1) {
+  		player4.pauseVideo();
+  	}
+  	else {
+  		player4.playVideo();
+  	}
+  },
+  'click #webgazer-pause': function(e, i) {
+  	webgazer.pause();
+  },
+  'click #webgazer-resume': function(e, i) {
+  	webgazer.resume();
+  },
+  'click #webgazer-pause': function(e, i) {
+  	webgazer.end();
   },
 });
