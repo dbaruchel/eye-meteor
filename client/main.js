@@ -7,7 +7,6 @@ if (Meteor.isClient) {
 
     // YouTube API will call onYouTubeIframeAPIReady() when API ready.
     // Make sure it's a global variable.
-    localStorage.clear(); 
     onYouTubeIframeAPIReady = function () {
   
         // New Video Player, the first argument is the id of the div.
@@ -197,7 +196,6 @@ Template.hello.helpers({
 
 Template.hello.events({
   'click #my-canvas': function(event, instance) {
-  	console.log("click canvas");
  //    // instance.counter.set(instance.counter.get() + 1);
  	var prediction = webgazer.getCurrentPrediction();
 
@@ -207,7 +205,6 @@ Template.hello.events({
      // $(".gif").gifplayer('stop');
   },
   'click #target-1': function(e, i) {
-  	console.log("click target-1");
   	player1.mute();
   	if (player1.getPlayerState() == 1) {
   		player1.pauseVideo();
