@@ -5,6 +5,9 @@ import './main.html';
 
 if (Meteor.isClient) {
 
+	var ww = $( window ).width();
+	var wh = $( window ).height();
+
     // YouTube API will call onYouTubeIframeAPIReady() when API ready.
     // Make sure it's a global variable.
     onYouTubeIframeAPIReady = function () {
@@ -13,8 +16,8 @@ if (Meteor.isClient) {
         // Make sure it's a global variable.
         player1 = new YT.Player("player-1", {
     
-            height: "315", 
-            width: "560", 
+            height: wh/2, 
+            width: ww/2, 
             videoId: "NVb5GV6lntU",
             playerVars: {
                 color: 'white',
@@ -40,8 +43,8 @@ if (Meteor.isClient) {
 
         player2 = new YT.Player("player-2", {
         
-            height: "315", 
-            width: "560", 
+            height: wh/2, 
+            width: ww/2, 
             videoId: "NVb5GV6lntU",
             playerVars: {
                 color: 'white',
@@ -67,8 +70,8 @@ if (Meteor.isClient) {
 
         player3 = new YT.Player("player-3", {
         
-            height: "315", 
-            width: "560", 
+            height: wh/2, 
+            width: ww/2, 
             videoId: "NVb5GV6lntU",
             playerVars: {
                 color: 'white',
@@ -94,8 +97,8 @@ if (Meteor.isClient) {
 
         player4 = new YT.Player("player-4", {
         
-            height: "315", 
-            width: "560", 
+            height: wh/2, 
+            width: ww/2, 
             videoId: "NVb5GV6lntU",
             playerVars: {
                 color: 'white',
@@ -121,6 +124,11 @@ if (Meteor.isClient) {
     };
 
     YT.load();
+}
+
+startMutePlayer = function(player) {
+	player.playVideo();
+	player.mute();
 }
 
 togglePlayer = function (player) {
@@ -165,25 +173,10 @@ switchTo = function (number) {
 
 Template.hello.onRendered(function helloOnCreated() {
   	// counter starts at 0
-	// this.counter = new ReactiveVar(0);
-
-  	// var player1;
-  	// function onYouTubeIframeAPIReady() {
-  	// 	console.log('yt api');
-  	//   	player1 = new YT.Player('player-1', {
-  	//     events: {
-  	//       'onReady': onPlayerReady,
-  	//       'onStateChange': onPlayerStateChange
-  	//     }
-  	//   });
-  	// }
+	this.counter = new ReactiveVar(0);
 
   	$.getScript( "webgazer.js" );
   	webgazer.begin();
-
-  	var ww = $( window ).width();
-	var wh = $( window ).height();
-  	
 
     clearInterval(time_update_interval);
     
@@ -226,23 +219,29 @@ Template.hello.onRendered(function helloOnCreated() {
   	    }
   	}, 1000);
 
-	// instance.counter.set(instance.counter.get() + 1);
 });
 
 
 Template.hello.helpers({
-  // counter() {
-  //   return Template.instance().counter.get();
-  // },
+  counter() {
+    return Template.instance().counter.get();
+  },
 });
 
 
 Template.hello.events({
   'click #my-canvas': function(event, instance) {
- //    // instance.counter.set(instance.counter.get() + 1);
+
+    instance.counter.set(instance.counter.get() + 1);
+    console.log(instance.counter.get());
+
+    if (instance.counter.get() == 20) {
+    	$('#start').css('display', 'block');
+    }
+
  	var prediction = webgazer.getCurrentPrediction();
 
-    $('#my-canvas').append('<div class="square" style="left:' + prediction.x + 'px; top:' + prediction.y + 'px;"></div>');
+    $('#my-canvas').append('<div class="dot" style="left:' + prediction.x + 'px; top:' + prediction.y + 'px;"></div>');
 
      // $(".gif").freezeframe();
      // $(".gif").gifplayer('stop');
@@ -271,5 +270,10 @@ Template.hello.events({
   },
   'click #webgazer-pause': function(e, i) {
   	webgazer.end();
+  },
+  'click #start': function(e, i) {
+  	$('.screen').css('display', 'none');
+  	$('#start').css('display', 'none');
+  	$('.dot').css('display', 'none');
   },
 });
